@@ -1,2 +1,4 @@
 replicaCount: 1
 imageVersion: ${imageVersion}
+chartVersion: 1.1.0
+# chartVersion: ${chartVersion}

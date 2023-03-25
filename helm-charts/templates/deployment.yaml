@@ -16,4 +16,4 @@ spec:
     spec:
       containers:
         - name: {{ .Release.Name }}
-          image: jsdevvv/lets_automate_solutions_app:${{ env.tag }}
+          image: jsdevvv/lets_automate_solutions_app:{{ .Values.imageVersion}}

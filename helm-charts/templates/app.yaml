@@ -1,19 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-nginx
+  name: {{ .Release.Name }}-LAS-APP
+  labels:
+    app: {{ .Release.Name }}-LAS-APP
 spec:
   selector:
     matchLabels:
-      run: my-nginx
+      app: {{ .Release.Name }}-LAS-APP
   replicas: 2
   template:
     metadata:
       labels:
-        run: my-nginx
+        app: {{ .Release.Name }}-LAS-APP
     spec:
       containers:
-      - name: my-nginx
+      - name: {{ .Release.Name }}-LAS-APP
         image: docker.io/jocatalin/kubernetes-bootcamp:v1
         ports:
         - containerPort: 8080
@@ -22,15 +24,15 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: my-nginx
+  name: {{ .Release.Name }}-LAS-APP
   labels:
-    run: my-nginx
+    app: {{ .Release.Name }}-LAS-APP
 spec:
   ports:
   - port: 8080
     protocol: TCP
   selector:
-    run: my-nginx
+    app: {{ .Release.Name }}-LAS-APP
 
 ---
 
@@ -48,6 +50,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: my-nginx
+            name: {{ .Release.Name }}-LAS-APP
             port:
               number: 8080
